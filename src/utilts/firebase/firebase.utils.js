@@ -1,0 +1,67 @@
+import { initializeApp } from 'firebase/app';
+import {
+  getAuth, 
+  signInWithRedirect,
+  signInWithPopup, 
+  GoogleAuthProvider
+} from 'firebase/auth';
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc
+} from 'firebase/firestore';
+
+// Your web app's Firebase configuration
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+
+const firebaseConfig = {
+
+  apiKey: "AIzaSyBvXVJtaVt7QeUHzMQEkabc-n78r6CGBTs",
+  authDomain: "e-commerce-react-835d6.firebaseapp.com",
+  projectId: "e-commerce-react-835d6",
+  storageBucket: "e-commerce-react-835d6.appspot.com",
+  messagingSenderId: "20341627659",
+  appId: "1:20341627659:web:e22061e9f065370907e00e",
+  measurementId: "G-55X9Y84RDL"
+};
+
+// Initialize Firebase
+
+const firebaseApp = initializeApp(firebaseConfig);
+
+const provider = new GoogleAuthProvider();
+provider.setCustomParameters({
+  promt: "select_account"
+});
+
+export const auth = getAuth();
+export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+
+export const db = getFirestore();
+
+export const createUserDocumentFromAuth = async ( userAuth) => {
+  const userDocRef = doc(db, 'users', userAuth.uid);
+  
+  console.log(userDocRef);
+
+  const userSnapshot = await getDoc(userDocRef);
+  
+  if(!userSnapshot.exists()) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      await setDoc(userDocRef, {
+        displayName,
+        email,
+        createdAt
+      });
+    } catch (error){
+      console.log('error creating the user', error.message);
+    }
+  }
+
+  return userDocRef;
+};
