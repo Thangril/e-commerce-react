@@ -21,7 +21,7 @@ const removeCartItem = (cartItems, cartItemToRemove)=> {
     );
 
     if(existingCartItem.quantity === 1) {
-      return cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id);
+      return cartItems.filter((cartItem) => cartItem.id !== cartItemToRemove.id);
     }
     return cartItems.map((cartItem) => cartItem.id === cartItemToRemove.id 
     ? {...cartItem, quantity: cartItem.quantity - 1}
@@ -29,6 +29,9 @@ const removeCartItem = (cartItems, cartItemToRemove)=> {
     );
 }
 
+const clearCartItem = (cartItems, cartItemToClear) => {
+  return cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
+}
 
 export const CartContext = createContext({
   isCartOpen: false,
@@ -36,19 +39,29 @@ export const CartContext = createContext({
   cartItems: [],
   addItemToCart: () => {},
   removeItemFromCart: () => {},
-  cartCount: 0
+  clearItemFromCart: () => {},
+  cartCount: 0,
+  cartTotal: 0
 });
 
 export const CartProvider =  ({children}) =>{
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, SetCartItems] = useState([]);
   const [cartCount, setCartCount] = useState(0);
+  const [cartTotal, setCartTotal] = useState(0);
 
   useEffect(() => {
     const newCartCount = cartItems.reduce(
       (total, cartItem) => total + cartItem.quantity,0)
       setCartCount(newCartCount);
   },[cartItems]);
+
+  useEffect(() => {
+    const newCartTotal = cartItems.reduce(
+      (total, cartItem) => total + cartItem.quantity * cartItem.price,0)
+      setCartTotal(newCartTotal);
+  },[cartItems]);
+
 
   const addItemToCart = (productToAdd) => {
     SetCartItems(addCartItem(cartItems, productToAdd));
@@ -58,13 +71,19 @@ export const CartProvider =  ({children}) =>{
     SetCartItems(removeCartItem(cartItems, cartItemToRemove));
   }
 
+  const clearItemFromCart = (cartItemToClear) => {
+    SetCartItems(clearCartItem(cartItems, cartItemToClear));
+  }
+
   const value = {
     isCartOpen, 
     setIsCartOpen, 
     addItemToCart,
+    removeItemFromCart,
+    clearItemFromCart,
     cartItems, 
-    cartCount,
-    removeItemFromCart
+    cartCount,  
+    cartTotal,
    };
   
   return (
