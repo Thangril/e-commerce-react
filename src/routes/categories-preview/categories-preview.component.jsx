@@ -3,11 +3,11 @@ import { CategoriesContext } from "../../context/categories.context";
 import CategoryPreview from "../../components/category-preview/category-preview.component";
 
 const CategoriesPreview = () => {
-  const { categoriesyMap } = useContext(CategoriesContext);
+  const { categoriesMap } = useContext(CategoriesContext);
   return (
     <Fragment>    
-      {Object.keys(categoriesyMap).map((title) => {
-        const products = categoriesyMap[title];
+      {Object.keys(categoriesMap).map((title) => {
+        const products = categoriesMap[title];
         return <CategoryPreview key={title} title={title} products={products} />
       })}       
     </Fragment>
