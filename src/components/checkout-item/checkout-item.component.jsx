@@ -38,7 +38,7 @@ const CheckoutItem = ({cartItem}) => {
       <BaseSpan>${price}</BaseSpan>
       <RemoveButton onClick={clearItemHandler}>&#10005;</RemoveButton>
     </CheckoutItemContainer>
-  )
-}
+  );
+};
 
 export default CheckoutItem;
