@@ -17,13 +17,11 @@ export const FormInputLabel = styled.label`
   pointer-events: none; 
   left: 5px; 
   top: 10px; 
-  transition: 300ms ease all;   
-
-  ${({shrink}) => shrink && ShrinkLabelStyles};     
+  transition: 300ms ease all;
+  ${({ shrink }) => shrink && ShrinkLabelStyles};     
 `; 
 
 export const Input = styled.input`
-.form-input {
   background: none;
   background-color: white;
   color: ${subColor};
@@ -43,10 +41,11 @@ export const Input = styled.input`
   &:focus ~ ${FormInputLabel} { 
     ${ShrinkLabelStyles};
   }   
-`
+`;
 export const Group = styled.div`
   position: relative;
   margin: 45px 0;
+
     input[type='password'] { 
     letter-spacing: 0.3em; 
-`
+`;
