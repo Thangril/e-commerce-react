@@ -51,8 +51,8 @@ export const DirectoryItemContainer = styled.div`
    
   &:last-child {
     margin-left: 7.5;
-  }
-
+  }  
+ 
   &:hover {
     cursor: pointer;
 
@@ -64,5 +64,9 @@ export const DirectoryItemContainer = styled.div`
     & ${Body} {
     opacity: 0.9;
     }
-  }  
+  }
+  @media screen and (max-width: 800px) {
+    height: 200px;
+  }
+  
 `;
