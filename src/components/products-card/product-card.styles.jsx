@@ -34,18 +34,25 @@ export const ProductCardContainer = styled.div`
    } 
 
    @media screen and (max-width: 800px) {
-
-    &:hover { 
-      img { 
-         opacity: unset; 
-      } 
+      width: 40vw;
+    
       button { 
-         opacity: unset; 
-        
-      } 
-   } 
-  }
+         display: block;
+         opacity: 0.9; 
+         min-width: unset;
+         padding: 0 10px;
 
+         &:hover {
+            img {
+               opacity: unset;
+            }
+
+            button { 
+               opacity: unset;               
+            } 
+         }        
+      } 
+   }
 `;
    
 export const Footer = styled.div`

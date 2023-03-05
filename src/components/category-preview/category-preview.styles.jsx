@@ -7,8 +7,7 @@ export const CategoryPreviewContainer = styled.div`
   margin-bottom: 30px; 
 
   @media screen and (max-width: 800px) {
-    align-items: center;
-    
+    align-items: center;    
 
   }
 `;
@@ -23,9 +22,9 @@ export const Preview = styled.div`
   grid-template-columns: repeat(4, 1fr); 
   column-gap: 10px; 
 
-  @media screen and (max-width: 800px) {
-    display: grid; 
-    grid-template-columns: repeat(1, 1fr); 
-    grid-gap: 20px;
+  @media screen and (max-width: 800px) {    
+    grid-template-columns: 1fr 1fr; 
+    grid-column-gap: 15px;
+    grid-row-gap: 20px;
   }
 `;
